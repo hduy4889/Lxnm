@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lạp Xưởng Nhà Làm - Hương Vị Truyền Thống</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom colors from user specification */
+        .bg-custom-beige { background-color: #Fff5cf; }
+        .text-custom-beige { color: #Fff5cf; }
+        .border-custom-beige { border-color: #Fff5cf; }
+
+        .bg-custom-maroon { background-color: #792220; }
+        .text-custom-maroon { color: #792220; }
+        .border-custom-maroon { border-color: #792220; }
+
+        .bg-custom-green { background-color: #3a5a40; }
+        .text-custom-green { color: #3a5a40; }
+        .border-custom-green { border-color: #3a5a40; }
+
+        .bg-custom-darkblue { background-color: #2a5c8e; }
+        .text-custom-darkblue { color: #2a5c8e; }
+        .border-custom-darkblue { border-color: #2a5c8e; }
+
+        .hero-bg {
+            background-image: url('https://placehold.co/1920x800/Fff5cf/792220?text=Lạp+Xưởng+Thơm+Ngon');
+            background-size: cover;
+            background-position: center;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .section-title {
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 700; /* bold */
+            margin-bottom: 2rem; /* mb-8 */
+            text-align: center;
+            color: #792220; /* Maroon */
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem; /* rounded-lg */
+            font-weight: 600; /* semibold */
+            transition: background-color 0.3s ease, color 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+        }
+        .btn-maroon {
+            background-color: #792220; /* Maroon */
+            color: #FFFFFF; /* White */
+        }
+        .btn-maroon:hover {
+            background-color: #5a1a18; /* Darker Maroon */
+        }
+        .btn-green {
+            background-color: #3a5a40; /* Green */
+            color: #FFFFFF; /* White */
+        }
+        .btn-green:hover {
+            background-color: #2b4230; /* Darker Green */
+        }
+        .btn-beige {
+            background-color: #Fff5cf; /* Custom Beige */
+            color: #792220; /* Maroon */
+        }
+        .btn-beige:hover {
+            background-color: #e6e1a6; /* Lighter Beige */
+        }
+
+        /* Navigation hover effect */
+        nav .md\:flex a {
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem; /* rounded-md */
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        nav .md\:flex a:hover {
+            background-color: #Fff5cf; /* custom-beige */
+            color: #792220; /* custom-maroon */
+        }
+        #mobile-menu a:hover {
+            background-color: #Fff5cf; /* custom-beige */
+            color: #792220; /* custom-maroon */
+        }
+        /* Modal styles */
+        .modal {
+            transition: opacity 0.3s ease-in-out;
+        }
+        .modal.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .modal:not(.hidden) {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="bg-custom-beige text-custom-darkblue">
+
+    <nav class="bg-custom-green shadow-md sticky top-0 z-40"> 
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-custom-beige">Lạp Xưởng Nhà Làm</a>
+            <div class="hidden md:flex space-x-1"> 
+                <a href="#home" class="text-custom-beige">Trang Chủ</a>
+                <a href="#products" class="text-custom-beige">Sản Phẩm</a>
+                <a href="#story" class="text-custom-beige">Câu Chuyện</a>
+                <a href="#contact" class="text-custom-beige">Liên Hệ</a>
+            </div>
+            <div class="flex items-center">
+                <a href="#" id="cartIconNav" class="relative text-custom-beige hover:text-custom-maroon transition duration-300 p-2 rounded-md hover:bg-custom-beige"> 
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span id="cartItemCount" class="absolute -top-1 -right-1 bg-custom-maroon text-xs text-white rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+                </a>
+                <button id="mobile-menu-button" class="md:hidden ml-2 text-custom-beige p-2 rounded-md hover:bg-custom-maroon/50">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-custom-green/95"> 
+            <a href="#home" class="block py-3 px-4 text-sm text-custom-beige">Trang Chủ</a>
+            <a href="#products" class="block py-3 px-4 text-sm text-custom-beige">Sản Phẩm</a>
+            <a href="#story" class="block py-3 px-4 text-sm text-custom-beige">Câu Chuyện</a>
+            <a href="#contact" class="block py-3 px-4 text-sm text-custom-beige">Liên Hệ</a>
+        </div>
+    </nav>
+
+    <header id="home" class="hero-bg text-white relative" style="background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center;">
+        <div class="absolute inset-0 bg-black opacity-40"></div>
+        <div class="container mx-auto px-6 py-32 text-center relative z-10">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">Lạp Xưởng Nhà Làm</h1>
+            <p class="text-xl md:text-2xl mb-10">"Gói" trọn hương xưa, "chia sẻ" vị mới.</p>
+            <a href="#products" class="btn btn-maroon text-lg">Khám Phá Sản Phẩm</a>
+        </div>
+    </header>
+
+    <section id="special-dish" class="py-16 bg-custom-maroon text-custom-beige">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/2 mb-8 md:mb-0">
+                <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=600&q=80" alt="Lạp xưởng đặc biệt" class="rounded-xl shadow-lg w-full object-cover">
+            </div>
+            <div class="md:w-1/2 text-center md:text-left">
+                <h2 class="text-4xl font-bold mb-4">Món Đặc Biệt Của Tiệm</h2>
+                <h3 class="text-2xl font-semibold mb-3">Lạp Xưởng Trứng Muối Đặc Biệt</h3>
+                <p class="mb-6 text-lg leading-relaxed">Sự kết hợp độc đáo giữa vị béo bùi của trứng muối và vị ngọt đậm đà của thịt heo tươi, tạo nên món lạp xưởng trứng muối đặc biệt chỉ có tại Lạp Xưởng Nhà Làm. Mỗi chiếc lạp xưởng đều được chế biến thủ công, giữ trọn hương vị truyền thống và đảm bảo an toàn vệ sinh thực phẩm.</p>
+                <ul class="mb-6 text-base list-disc list-inside">
+                    <li>Nguyên liệu chọn lọc, trứng muối tươi ngon</li>
+                    <li>Không chất bảo quản, không phẩm màu</li>
+                    <li>Đóng gói hút chân không, giao hàng tận nơi</li>
+                </ul>
+                <a href="#products" class="btn btn-beige text-custom-maroon text-lg font-semibold">Khám Phá Ngay</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="products" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-custom-maroon">Sản Phẩm Của Chúng Tôi</h2>
+            <p class="text-center text-custom-darkblue mb-12 max-w-2xl mx-auto">
+                Thưởng thức hương vị lạp xưởng truyền thống, được làm từ tâm huyết và công thức gia truyền. Chúng tôi có cả lạp xưởng tươi mới mỗi ngày và lạp xưởng đóng gói tiện lợi.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                <div>
+                    <h3 class="text-3xl font-semibold text-custom-green mb-6 text-center md:text-left">Lạp Xưởng Đóng Gói</h3>
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div class="bg-custom-beige rounded-xl shadow-lg p-6 product-card transition duration-300 flex flex-col">
+                            <img src="https://placehold.co/400x300/Fff5cf/792220?text=Lạp+Xưởng+Gói+Loại+1" alt="Lạp xưởng đóng gói loại 1" class="w-full h-48 object-cover rounded-md mb-4">
+                            <h4 class="text-xl font-semibold text-custom-maroon mb-2">Lạp Xưởng Thượng Hạng</h4>
+                            <p class="text-custom-darkblue text-sm mb-3 flex-grow">Được làm từ thịt heo tươi chọn lọc, tẩm ướp gia vị tự nhiên, đóng gói hút chân không đảm bảo vệ sinh.</p>
+                            <p class="text-lg font-bold text-custom-green mb-4">150.000 VNĐ / gói 500g</p>
+                            <button class="btn btn-maroon w-full add-to-cart-btn">Thêm vào giỏ</button>
+                        </div>
+                        <div class="bg-custom-beige rounded-xl shadow-lg p-6 product-card transition duration-300 flex flex-col">
+                            <img src="https://placehold.co/400x300/Fff5cf/3a5a40?text=Lạp+Xưởng+Gói+Loại+2" alt="Lạp xưởng đóng gói loại 2" class="w-full h-48 object-cover rounded-md mb-4">
+                            <h4 class="text-xl font-semibold text-custom-maroon mb-2">Lạp Xưởng Tôm Khô</h4>
+                            <p class="text-custom-darkblue text-sm mb-3 flex-grow">Hương vị độc đáo kết hợp giữa vị ngọt của thịt và vị đậm đà của tôm khô thượng hạng.</p>
+                            <p class="text-lg font-bold text-custom-green mb-4">180.000 VNĐ / gói 500g</p>
+                            <button class="btn btn-maroon w-full add-to-cart-btn">Thêm vào giỏ</button>
+                        </div>
+                        <!-- Sản phẩm mới: Lạp Xưởng Trứng Muối -->
+                        <div class="bg-custom-beige rounded-xl shadow-lg p-6 product-card transition duration-300 flex flex-col">
+                            <img src="https://placehold.co/400x300/Fff5cf/2a5c8e?text=Lạp+Xưởng+Trứng+Muối" alt="Lạp xưởng trứng muối" class="w-full h-48 object-cover rounded-md mb-4">
+                            <h4 class="text-xl font-semibold text-custom-maroon mb-2">Lạp Xưởng Trứng Muối</h4>
+                            <p class="text-custom-darkblue text-sm mb-3 flex-grow">Sự kết hợp giữa vị béo của trứng muối và vị ngọt của thịt, tạo nên trải nghiệm mới lạ.</p>
+                            <p class="text-lg font-bold text-custom-green mb-4">200.000 VNĐ / gói 500g</p>
+                            <button class="btn btn-maroon w-full add-to-cart-btn">Thêm vào giỏ</button>
+                        </div>
+                        <!-- Sản phẩm mới: Combo Quà Tặng -->
+                        <div class="bg-custom-beige rounded-xl shadow-lg p-6 product-card transition duration-300 flex flex-col">
+                            <img src="https://placehold.co/400x300/3a5a40/Fff5cf?text=Combo+Quà+Tặng" alt="Combo quà tặng lạp xưởng" class="w-full h-48 object-cover rounded-md mb-4">
+                            <h4 class="text-xl font-semibold text-custom-maroon mb-2">Combo Quà Tặng Đặc Biệt</h4>
+                            <p class="text-custom-darkblue text-sm mb-3 flex-grow">Hộp quà sang trọng gồm nhiều loại lạp xưởng, thích hợp biếu tặng dịp lễ Tết.</p>
+                            <p class="text-lg font-bold text-custom-green mb-4">450.000 VNĐ / hộp</p>
+                            <button class="btn btn-maroon w-full add-to-cart-btn">Thêm vào giỏ</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-3xl font-semibold text-custom-green mb-6 text-center md:text-left">Lạp Xưởng Tươi</h3>
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div class="bg-custom-beige rounded-xl shadow-lg p-6 product-card transition duration-300 flex flex-col">
+                            <img src="https://placehold.co/400x300/Fff5cf/2a5c8e?text=Lạp+Xưởng+Tươi+1" alt="Lạp xưởng tươi loại 1" class="w-full h-48 object-cover rounded-md mb-4">
+                            <h4 class="text-xl font-semibold text-custom-maroon mb-2">Lạp Xưởng Tươi Truyền Thống</h4>
+                            <p class="text-custom-darkblue text-sm mb-3 flex-grow">Lạp xưởng tươi mới mỗi ngày, giữ trọn vị ngọt tự nhiên của thịt và hương thơm đặc trưng.</p>
+                            <p class="text-lg font-bold text-custom-green mb-4">250.000 VNĐ / kg</p>
+                            <button class="btn btn-maroon w-full add-to-cart-btn">Thêm vào giỏ</button>
+                        </div>
+                        <div class="bg-custom-beige rounded-xl shadow-lg p-6 product-card transition duration-300 flex flex-col">
+                            <img src="https://placehold.co/400x300/Fff5cf/792220?text=Lạp+Xưởng+Tươi+Cay" alt="Lạp xưởng tươi cay" class="w-full h-48 object-cover rounded-md mb-4">
+                            <h4 class="text-xl font-semibold text-custom-maroon mb-2">Lạp Xưởng Tươi Vị Cay</h4>
+                            <p class="text-custom-darkblue text-sm mb-3 flex-grow">Dành cho người thích vị cay nồng, kích thích vị giác, làm từ ớt tươi tự nhiên.</p>
+                            <p class="text-lg font-bold text-custom-green mb-4">270.000 VNĐ / kg</p>
+                            <button class="btn btn-maroon w-full add-to-cart-btn">Thêm vào giỏ</button>
+                        </div>
+                        <!-- Sản phẩm mới: Lạp Xưởng Chay -->
+                        <div class="bg-custom-beige rounded-xl shadow-lg p-6 product-card transition duration-300 flex flex-col">
+                            <img src="https://placehold.co/400x300/792220/Fff5cf?text=Lạp+Xưởng+Chay" alt="Lạp xưởng chay" class="w-full h-48 object-cover rounded-md mb-4">
+                            <h4 class="text-xl font-semibold text-custom-maroon mb-2">Lạp Xưởng Chay</h4>
+                            <p class="text-custom-darkblue text-sm mb-3 flex-grow">Dành cho người ăn chay, làm từ đậu nành và gia vị tự nhiên, vị ngon không kém lạp xưởng truyền thống.</p>
+                            <p class="text-lg font-bold text-custom-green mb-4">120.000 VNĐ / gói 400g</p>
+                            <button class="btn btn-maroon w-full add-to-cart-btn">Thêm vào giỏ</button>
+                        </div>
+                        <!-- Sản phẩm mới: Lạp Xưởng Tiêu Đen -->
+                        <div class="bg-custom-beige rounded-xl shadow-lg p-6 product-card transition duration-300 flex flex-col">
+                            <img src="https://placehold.co/400x300/2a5c8e/Fff5cf?text=Lạp+Xưởng+Tiêu+Đen" alt="Lạp xưởng tiêu đen" class="w-full h-48 object-cover rounded-md mb-4">
+                            <h4 class="text-xl font-semibold text-custom-maroon mb-2">Lạp Xưởng Tiêu Đen</h4>
+                            <p class="text-custom-darkblue text-sm mb-3 flex-grow">Vị cay nhẹ của tiêu đen hòa quyện cùng vị ngọt của thịt, thích hợp cho bữa cơm gia đình.</p>
+                            <p class="text-lg font-bold text-custom-green mb-4">260.000 VNĐ / kg</p>
+                            <button class="btn btn-maroon w-full add-to-cart-btn">Thêm vào giỏ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="story" class="py-16 bg-custom-beige">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <img src="https://placehold.co/600x400/3a5a40/Fff5cf?text=Câu+Chuyện+Thương+Hiệu" alt="Câu chuyện thương hiệu lạp xưởng" class="rounded-xl shadow-lg w-full">
+                </div>
+                <div class="md:w-1/2 text-center md:text-left">
+                    <h2 class="section-title text-custom-maroon !text-left">Câu Chuyện Của Chúng Tôi</h2>
+                    <p class="text-custom-darkblue mb-4 leading-relaxed">
+                        "Lạp xưởng nhà làm" không chỉ là một món ăn, mà còn là ký ức, là hương vị của quê hương, của những bữa cơm gia đình ấm cúng. Chúng tôi bắt đầu với mong muốn gìn giữ và lan tỏa công thức gia truyền, mang đến những sản phẩm chất lượng nhất, đậm đà hương vị truyền thống nhưng vẫn phù hợp với cuộc sống hiện đại.
+                    </p>
+                    <p class="text-custom-darkblue mb-6 leading-relaxed">
+                        Mỗi chiếc lạp xưởng đều được làm từ tâm huyết, từ những nguyên liệu tươi ngon nhất, đảm bảo vệ sinh an toàn thực phẩm. Chúng tôi tin rằng, "Đóng gói Vị Xưa, Lan tỏa Vị Nay" không chỉ là slogan, mà là cam kết mang đến trải nghiệm ẩm thực tuyệt vời cho bạn và gia đình.
+                    </p>
+                    <a href="#" class="btn btn-green">Tìm Hiểu Thêm</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-custom-maroon">Cam Kết Chất Lượng</h2>
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div class="p-6">
+                    <div class="bg-custom-green text-custom-beige rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-custom-maroon mb-2">Công Thức Gia Truyền</h3>
+                    <p class="text-custom-darkblue text-sm">Hương vị độc đáo được lưu giữ qua nhiều thế hệ, đảm bảo vị ngon truyền thống.</p>
+                </div>
+                <div class="p-6">
+                    <div class="bg-custom-maroon text-custom-beige rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 shadow-md">
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.469 6.469a1 1 0 01-1.414-1.414l3-3a1 1 0 011.414 1.414l-3 3zM5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z" clip-rule="evenodd" /></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-custom-maroon mb-2">Nguyên Liệu Tươi Sạch</h3>
+                    <p class="text-custom-darkblue text-sm">Tuyển chọn kỹ lưỡng từ thịt heo tươi ngon và các gia vị tự nhiên, an toàn.</p>
+                </div>
+                <div class="p-6">
+                     <div class="bg-custom-darkblue text-custom-beige rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-custom-maroon mb-2">Chứng Nhận ATTP</h3>
+                    <p class="text-custom-darkblue text-sm">Sản phẩm đạt chứng nhận An Toàn Thực Phẩm, quy trình sản xuất khép kín, hợp vệ sinh.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-custom-beige">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-custom-maroon">Khách Hàng Nói Gì Về Chúng Tôi</h2>
+            <div class="relative max-w-3xl mx-auto">
+                <div id="testimonialSlider" class="overflow-hidden">
+                    <div class="flex transition-transform duration-700" style="will-change: transform;">
+                        <!-- Slide 1 -->
+                        <div class="min-w-full px-4">
+                            <div class="bg-white p-6 rounded-lg shadow-lg h-full flex flex-col justify-between">
+                                <p class="text-custom-darkblue italic mb-4">"Lạp xưởng ở đây ngon tuyệt! Vị đậm đà, thơm lừng, đúng chuẩn nhà làm. Gia đình tôi ai cũng thích."</p>
+                                <p class="font-semibold text-custom-green">- Chị Lan Anh, Quận 1</p>
+                            </div>
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="min-w-full px-4">
+                            <div class="bg-white p-6 rounded-lg shadow-lg h-full flex flex-col justify-between">
+                                <p class="text-custom-darkblue italic mb-4">"Tôi đã thử nhiều loại lạp xưởng nhưng đây là chỗ tôi ưng ý nhất. Lạp xưởng tươi, đóng gói cẩn thận, giao hàng nhanh."</p>
+                                <p class="font-semibold text-custom-green">- Anh Minh Tuấn, Hà Nội</p>
+                            </div>
+                        </div>
+                        <!-- Slide 3 -->
+                        <div class="min-w-full px-4">
+                            <div class="bg-white p-6 rounded-lg shadow-lg h-full flex flex-col justify-between">
+                                <p class="text-custom-darkblue italic mb-4">"Mua làm quà biếu ai cũng khen. Sẽ tiếp tục ủng hộ shop. Màu sắc lạp xưởng tự nhiên, ăn không bị ngán."</p>
+                                <p class="font-semibold text-custom-green">- Cô Ba, Cần Thơ</p>
+                            </div>
+                        </div>
+                        <!-- Slide 4 -->
+                        <div class="min-w-full px-4">
+                            <div class="bg-white p-6 rounded-lg shadow-lg h-full flex flex-col justify-between">
+                                <p class="text-custom-darkblue italic mb-4">"Shop tư vấn nhiệt tình, đóng gói đẹp, giao hàng đúng hẹn. Lạp xưởng ăn rất vừa miệng."</p>
+                                <p class="font-semibold text-custom-green">- Anh Hùng, Bình Thạnh</p>
+                            </div>
+                        </div>
+                        <!-- Slide 5 -->
+                        <div class="min-w-full px-4">
+                            <div class="bg-white p-6 rounded-lg shadow-lg h-full flex flex-col justify-between">
+                                <p class="text-custom-darkblue italic mb-4">"Lần đầu mua thử mà rất hài lòng, lạp xưởng không bị ngọt quá, vị rất tự nhiên."</p>
+                                <p class="font-semibold text-custom-green">- Chị Mai, Đà Nẵng</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Dots -->
+                <div class="flex justify-center mt-6 space-x-2" id="testimonialDots"></div>
+                <!-- Navigation buttons moved further outside -->
+                <div class="flex justify-between items-center mt-8">
+                    <button id="prevTestimonial" class="bg-custom-maroon text-white rounded-full p-3 shadow hover:bg-custom-green transition" aria-label="Trước"><svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
+                    <button id="nextTestimonial" class="bg-custom-maroon text-white rounded-full p-3 shadow hover:bg-custom-green transition" aria-label="Sau"><svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-custom-maroon">Tin Tức & Mẹo Vặt</h2>
+            <div class="relative max-w-5xl mx-auto">
+                <div id="newsSlider" class="overflow-hidden">
+                    <div class="flex transition-transform duration-700" style="will-change: transform;">
+                        <!-- Slide 1 -->
+                        <div class="min-w-full px-4">
+                            <div class="grid md:grid-cols-3 gap-8">
+                                <div class="bg-custom-beige rounded-lg shadow-lg overflow-hidden product-card transition duration-300">
+                                    <img src="https://placehold.co/400x250/3a5a40/Fff5cf?text=Mẹo+Bảo+Quản" alt="Mẹo bảo quản lạp xưởng" class="w-full h-48 object-cover">
+                                    <div class="p-6">
+                                        <h3 class="text-xl font-semibold text-custom-maroon mb-2">Cách Bảo Quản Lạp Xưởng Tươi Lâu</h3>
+                                        <p class="text-custom-darkblue text-sm mb-4">Khám phá các mẹo đơn giản để giữ lạp xưởng tươi ngon trong thời gian dài...</p>
+                                        <a href="#" class="text-custom-green font-semibold hover:underline">Đọc thêm &rarr;</a>
+                                    </div>
+                                </div>
+                                <div class="bg-custom-beige rounded-lg shadow-lg overflow-hidden product-card transition duration-300">
+                                    <img src="https://placehold.co/400x250/792220/Fff5cf?text=Công+Thức+Ngon" alt="Công thức món ngon với lạp xưởng" class="w-full h-48 object-cover">
+                                    <div class="p-6">
+                                        <h3 class="text-xl font-semibold text-custom-maroon mb-2">5 Món Ngon Chế Biến Từ Lạp Xưởng</h3>
+                                        <p class="text-custom-darkblue text-sm mb-4">Biến tấu lạp xưởng thành những món ăn hấp dẫn cho bữa cơm gia đình...</p>
+                                        <a href="#" class="text-custom-green font-semibold hover:underline">Đọc thêm &rarr;</a>
+                                    </div>
+                                </div>
+                                <div class="bg-custom-beige rounded-lg shadow-lg overflow-hidden product-card transition duration-300">
+                                    <img src="https://placehold.co/400x250/2a5c8e/Fff5cf?text=Lạp+Xưởng+Ngày+Tết" alt="Lạp xưởng ngày Tết" class="w-full h-48 object-cover">
+                                    <div class="p-6">
+                                        <h3 class="text-xl font-semibold text-custom-maroon mb-2">Lạp Xưởng Trong Mâm Cỗ Ngày Tết</h3>
+                                        <p class="text-custom-darkblue text-sm mb-4">Tìm hiểu ý nghĩa của lạp xưởng trong văn hóa ẩm thực ngày Tết cổ truyền...</p>
+                                        <a href="#" class="text-custom-green font-semibold hover:underline">Đọc thêm &rarr;</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="min-w-full px-4">
+                            <div class="grid md:grid-cols-3 gap-8">
+                                <div class="bg-custom-beige rounded-lg shadow-lg overflow-hidden product-card transition duration-300">
+                                    <img src="https://placehold.co/400x250/3a5a40/Fff5cf?text=Mẹo+Chọn+Lạp+Xưởng" alt="Mẹo chọn lạp xưởng ngon" class="w-full h-48 object-cover">
+                                    <div class="p-6">
+                                        <h3 class="text-xl font-semibold text-custom-maroon mb-2">Mẹo Chọn Lạp Xưởng Ngon</h3>
+                                        <p class="text-custom-darkblue text-sm mb-4">Những bí quyết giúp bạn chọn được lạp xưởng chất lượng, an toàn cho gia đình...</p>
+                                        <a href="#" class="text-custom-green font-semibold hover:underline">Đọc thêm &rarr;</a>
+                                    </div>
+                                </div>
+                                <div class="bg-custom-beige rounded-lg shadow-lg overflow-hidden product-card transition duration-300">
+                                    <img src="https://placehold.co/400x250/792220/Fff5cf?text=Ăn+Lạp+Xưởng+Đúng+Cách" alt="Ăn lạp xưởng đúng cách" class="w-full h-48 object-cover">
+                                    <div class="p-6">
+                                        <h3 class="text-xl font-semibold text-custom-maroon mb-2">Ăn Lạp Xưởng Đúng Cách</h3>
+                                        <p class="text-custom-darkblue text-sm mb-4">Hướng dẫn cách chế biến và thưởng thức lạp xưởng để giữ trọn hương vị...</p>
+                                        <a href="#" class="text-custom-green font-semibold hover:underline">Đọc thêm &rarr;</a>
+                                    </div>
+                                </div>
+                                <div class="bg-custom-beige rounded-lg shadow-lg overflow-hidden product-card transition duration-300">
+                                    <img src="https://placehold.co/400x250/2a5c8e/Fff5cf?text=Lạp+Xưởng+Và+Sức+Khỏe" alt="Lạp xưởng và sức khỏe" class="w-full h-48 object-cover">
+                                    <div class="p-6">
+                                        <h3 class="text-xl font-semibold text-custom-maroon mb-2">Lạp Xưởng & Sức Khỏe</h3>
+                                        <p class="text-custom-darkblue text-sm mb-4">Tìm hiểu về giá trị dinh dưỡng và lưu ý khi sử dụng lạp xưởng trong bữa ăn...</p>
+                                        <a href="#" class="text-custom-green font-semibold hover:underline">Đọc thêm &rarr;</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 3 -->
+                        <div class="min-w-full px-4">
+                            <div class="grid md:grid-cols-3 gap-8">
+                                <div class="bg-custom-beige rounded-lg shadow-lg overflow-hidden product-card transition duration-300">
+                                    <img src="https://placehold.co/400x250/3a5a40/Fff5cf?text=Mẹo+Làm+Lạp+Xưởng+Tại+Nhà" alt="Mẹo làm lạp xưởng tại nhà" class="w-full h-48 object-cover">
+                                    <div class="p-6">
+                                        <h3 class="text-xl font-semibold text-custom-maroon mb-2">Mẹo Làm Lạp Xưởng Tại Nhà</h3>
+                                        <p class="text-custom-darkblue text-sm mb-4">Cách tự làm lạp xưởng thơm ngon, an toàn ngay tại căn bếp của bạn...</p>
+                                        <a href="#" class="text-custom-green font-semibold hover:underline">Đọc thêm &rarr;</a>
+                                    </div>
+                                </div>
+                                <div class="bg-custom-beige rounded-lg shadow-lg overflow-hidden product-card transition duration-300">
+                                    <img src="https://placehold.co/400x250/792220/Fff5cf?text=Kết+Hợp+Lạp+Xưởng" alt="Kết hợp lạp xưởng với món ăn khác" class="w-full h-48 object-cover">
+                                    <div class="p-6">
+                                        <h3 class="text-xl font-semibold text-custom-maroon mb-2">Kết Hợp Lạp Xưởng Với Món Ăn Khác</h3>
+                                        <p class="text-custom-darkblue text-sm mb-4">Gợi ý các món ăn kết hợp cùng lạp xưởng cho bữa cơm thêm phong phú...</p>
+                                        <a href="#" class="text-custom-green font-semibold hover:underline">Đọc thêm &rarr;</a>
+                                    </div>
+                                </div>
+                                <div class="bg-custom-beige rounded-lg shadow-lg overflow-hidden product-card transition duration-300">
+                                    <img src="https://placehold.co/400x250/2a5c8e/Fff5cf?text=Giải+Đáp+Thắc+Mắc" alt="Giải đáp thắc mắc về lạp xưởng" class="w-full h-48 object-cover">
+                                    <div class="p-6">
+                                        <h3 class="text-xl font-semibold text-custom-maroon mb-2">Giải Đáp Thắc Mắc Về Lạp Xưởng</h3>
+                                        <p class="text-custom-darkblue text-sm mb-4">Những câu hỏi thường gặp về lạp xưởng và giải đáp từ chuyên gia...</p>
+                                        <a href="#" class="text-custom-green font-semibold hover:underline">Đọc thêm &rarr;</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Dots -->
+                <div class="flex justify-center mt-6 space-x-2" id="newsDots"></div>
+                <!-- Navigation buttons -->
+                <div class="flex justify-between items-center mt-8">
+                    <button id="prevNews" class="bg-custom-maroon text-white rounded-full p-3 shadow hover:bg-custom-green transition" aria-label="Trước"><svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
+                    <button id="nextNews" class="bg-custom-maroon text-white rounded-full p-3 shadow hover:bg-custom-green transition" aria-label="Sau"><svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-custom-green text-custom-beige">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-6">Sẵn Sàng Thưởng Thức Hương Vị Tuyệt Hảo?</h2>
+            <p class="text-lg mb-8 max-w-xl mx-auto">Đừng bỏ lỡ cơ hội nếm thử lạp xưởng nhà làm gia truyền, thơm ngon và đậm đà. Đặt hàng ngay hôm nay!</p>
+            <a href="#products" class="btn bg-custom-maroon text-white text-xl hover:bg-opacity-80">Đặt Hàng Ngay</a>
+        </div>
+    </section>
+
+    <footer id="contact" class="bg-custom-darkblue text-custom-beige pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Lạp Xưởng Nhà Làm</h3>
+                    <p class="text-sm leading-relaxed">Mang hương vị truyền thống đến mọi nhà. Chất lượng, an toàn và tiện lợi.</p>
+                    <p class="text-sm mt-2">&copy; 2025 Lạp Xưởng Nhà Làm. All rights reserved.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Liên Kết Nhanh</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#home" class="hover:text-custom-maroon transition duration-300">Trang Chủ</a></li>
+                        <li><a href="#products" class="hover:text-custom-maroon transition duration-300">Sản Phẩm</a></li>
+                        <li><a href="#story" class="hover:text-custom-maroon transition duration-300">Câu Chuyện Thương Hiệu</a></li>
+                        <li><a href="#" class="hover:text-custom-maroon transition duration-300">Chính Sách Đổi Trả</a></li>
+                        <li><a href="#" class="hover:text-custom-maroon transition duration-300">Điều Khoản Dịch Vụ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Thông Tin Liên Hệ</h3>
+                    <p class="text-sm mb-2">Địa chỉ: 123 Đường ABC, Phường XYZ, Quận 1, TP. HCM</p>
+                    <p class="text-sm mb-2">Hotline: <a href="tel:0909123456" class="hover:text-custom-maroon transition duration-300">0909.123.456</a></p>
+                    <p class="text-sm mb-2">Email: <a href="mailto:info@lapxuongnhalam.com" class="hover:text-custom-maroon transition duration-300">info@lapxuongnhalam.com</a></p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-custom-beige hover:text-custom-maroon transition duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+                        </a>
+                        <a href="#" class="text-custom-beige hover:text-custom-maroon transition duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.26-.149-4.771-1.699-4.919-4.92-.058-1.279-.07-1.663-.07-4.85s.012-3.584.07-4.85c.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.273 0-3.663.014-4.942.076-4.353.2-6.78 2.618-6.98 6.98-.062 1.279-.076 1.663-.076 4.942s.014 3.664.076 4.942c.2 4.368 2.627 6.78 6.98 6.98 1.279.062 1.663.076 4.942.076s3.663-.014 4.942-.076c4.354-.2 6.782-2.618 6.979-6.98.063-1.279.076-1.663.076-4.942s-.013-3.664-.076-4.942c-.198-4.368-2.626-6.78-6.979-6.98-1.279-.062-1.663-.076-4.942-.076zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <a href="#" class="text-custom-beige hover:text-custom-maroon transition duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.737v-8.078l7.011 4.039-7.011 4.039z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center text-sm pt-8 border-t border-custom-green/50">
+                <p>Thiết kế bởi Gemini AI - Lấy cảm hứng từ hương vị truyền thống.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="addToCartModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 overflow-y-auto h-full w-full flex items-center justify-center hidden z-50 modal">
+        <div class="p-8 border w-auto max-w-md shadow-lg rounded-xl bg-white mx-4">
+            <div class="text-center">
+                <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-custom-green mb-4">
+                    <svg class="h-8 w-8 text-custom-beige" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-custom-green mb-3">Đã thêm vào giỏ!</h3>
+                <p id="confirmProductName" class="text-custom-darkblue mb-6 text-sm">Sản phẩm [Tên sản phẩm] đã được thêm vào giỏ hàng của bạn.</p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
+                    <button id="closeCartModalBtn" class="btn btn-green w-full sm:w-auto">Tiếp tục mua sắm</button>
+                    <button id="viewCartBtnModal" class="btn btn-maroon w-full sm:w-auto">Xem giỏ hàng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="checkoutModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 overflow-y-auto h-full w-full flex items-center justify-center hidden z-50 modal">
+        <div class="p-6 sm:p-8 border w-full max-w-2xl shadow-lg rounded-xl bg-white mx-4 my-8">
+            <div class="text-left">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-custom-maroon">Thông Tin Thanh Toán</h3>
+                    <button id="closeCheckoutModalBtn" class="text-gray-500 hover:text-gray-700 text-3xl leading-none">&times;</button>
+                </div>
+                <div id="cartSummary" class="mb-6 max-h-60 overflow-y-auto pr-2">
+                    <p class="text-custom-darkblue">Giỏ hàng của bạn hiện đang trống.</p>
+                </div>
+                <form id="checkoutForm">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label for="fullName" class="block text-sm font-medium text-custom-darkblue mb-1">Họ và Tên</label>
+                            <input type="text" id="fullName" name="fullName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-custom-maroon focus:ring focus:ring-custom-maroon focus:ring-opacity-50 p-2 text-sm" required>
+                        </div>
+                        <div>
+                            <label for="phoneNumber" class="block text-sm font-medium text-custom-darkblue mb-1">Số Điện Thoại</label>
+                            <input type="tel" id="phoneNumber" name="phoneNumber" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-custom-maroon focus:ring focus:ring-custom-maroon focus:ring-opacity-50 p-2 text-sm" required>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="address" class="block text-sm font-medium text-custom-darkblue mb-1">Địa Chỉ Nhận Hàng</label>
+                        <textarea id="address" name="address" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-custom-maroon focus:ring focus:ring-custom-maroon focus:ring-opacity-50 p-2 text-sm" required></textarea>
+                    </div>
+                    <div class="mb-6">
+                        <label for="paymentMethod" class="block text-sm font-medium text-custom-darkblue mb-1">Phương Thức Thanh Toán</label>
+                        <select id="paymentMethod" name="paymentMethod" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-custom-maroon focus:ring focus:ring-custom-maroon focus:ring-opacity-50 p-2 text-sm">
+                            <option value="cod">Thanh toán khi nhận hàng (COD)</option>
+                            <option value="bank">Chuyển khoản ngân hàng</option>
+                        </select>
+                    </div>
+                    <div class="flex justify-end space-x-3">
+                         <button type="button" id="cancelCheckoutBtn" class="btn bg-gray-200 text-gray-700 hover:bg-gray-300">Hủy</button>
+                        <button type="submit" class="btn btn-maroon">Xác Nhận Đặt Hàng</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div id="successOrderModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 overflow-y-auto h-full w-full flex items-center justify-center hidden z-50 modal">
+        <div class="p-8 border w-auto max-w-md shadow-lg rounded-xl bg-white mx-4">
+            <div class="text-center">
+                 <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-custom-green mb-4">
+                    <svg class="h-8 w-8 text-custom-beige" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-custom-green mb-3">Đặt hàng thành công!</h3>
+                <p class="text-custom-darkblue mb-6 text-sm">Cảm ơn bạn đã đặt hàng. Chúng tôi sẽ liên hệ với bạn sớm để xác nhận.</p>
+                <button id="closeSuccessOrderModalBtn" class="btn btn-green">Tuyệt vời!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Quick View Modal -->
+    <div id="productQuickViewModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 overflow-y-auto h-full w-full flex items-center justify-center hidden z-50 modal">
+        <div class="p-8 border w-auto max-w-lg shadow-lg rounded-xl bg-white mx-4 relative">
+            <button id="closeQuickViewModalBtn" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-3xl leading-none">&times;</button>
+            <div class="flex flex-col md:flex-row gap-6 items-center">
+                <img id="quickViewImg" src="" alt="Ảnh sản phẩm" class="w-40 h-40 object-cover rounded-lg shadow">
+                <div class="flex-1 text-center md:text-left">
+                    <h3 id="quickViewName" class="text-2xl font-bold text-custom-maroon mb-2"></h3>
+                    <p id="quickViewDesc" class="text-custom-darkblue mb-4 text-sm"></p>
+                    <p id="quickViewPrice" class="text-lg font-bold text-custom-green mb-4"></p>
+                    <button id="quickViewAddToCartBtn" class="btn btn-maroon w-full md:w-auto">Thêm vào giỏ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // Smooth scroll for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                        // Close mobile menu after click if open
+                        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+
+            // Modals
+            const addToCartModal = document.getElementById('addToCartModal');
+            const closeCartModalBtn = document.getElementById('closeCartModalBtn');
+            const viewCartBtnModal = document.getElementById('viewCartBtnModal');
+            const confirmProductName = document.getElementById('confirmProductName');
+
+            const checkoutModal = document.getElementById('checkoutModal');
+            const closeCheckoutModalBtn = document.getElementById('closeCheckoutModalBtn');
+            const cancelCheckoutBtn = document.getElementById('cancelCheckoutBtn');
+            const cartSummaryDiv = document.getElementById('cartSummary');
+            const checkoutForm = document.getElementById('checkoutForm');
+            
+            const successOrderModal = document.getElementById('successOrderModal');
+            const closeSuccessOrderModalBtn = document.getElementById('closeSuccessOrderModalBtn');
+
+
+            // Cart Icon
+            const cartIconNav = document.getElementById('cartIconNav');
+            const cartItemCountSpan = document.getElementById('cartItemCount');
+
+            let cart = []; // Array to store cart items { name, price, quantity }
+
+            // --- Add to Cart Buttons ---
+            const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const productCard = event.target.closest('.product-card');
+                    const productName = productCard.querySelector('h4').textContent;
+                    const productPriceText = productCard.querySelector('.text-lg.font-bold').textContent;
+                    // Extracts number, handles thousands separator "." and assumes VNĐ is the currency.
+                    const priceString = productPriceText.split('VNĐ')[0].replace(/\./g, '').trim();
+                    const price = parseFloat(priceString);
+
+                    if (!isNaN(price)) {
+                        addItemToCart(productName, price);
+                        if(confirmProductName) confirmProductName.textContent = `Sản phẩm "${productName}" đã được thêm vào giỏ hàng của bạn.`;
+                        if(addToCartModal) addToCartModal.classList.remove('hidden');
+                    } else {
+                        console.error("Could not parse price for product:", productName, "from text:", productPriceText);
+                        // Optionally, show an error to the user.
+                    }
+                });
+            });
+
+            // --- Cart Logic ---
+            function addItemToCart(name, price) {
+                const existingItem = cart.find(item => item.name === name);
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({ name, price, quantity: 1 });
+                }
+                updateCartIcon();
+            }
+
+            function updateCartIcon() {
+                if (!cartItemCountSpan) return;
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                if (totalItems > 0) {
+                    cartItemCountSpan.textContent = totalItems;
+                    cartItemCountSpan.classList.remove('hidden');
+                } else {
+                    cartItemCountSpan.textContent = '0'; // Keep it consistent
+                    cartItemCountSpan.classList.add('hidden');
+                }
+            }
+
+            function renderCartSummary() {
+                if (!cartSummaryDiv) return;
+                cartSummaryDiv.innerHTML = ''; // Clear previous summary
+                if (cart.length === 0) {
+                    cartSummaryDiv.innerHTML = '<p class="text-custom-darkblue text-center py-4">Giỏ hàng của bạn hiện đang trống.</p>';
+                    return;
+                }
+
+                let totalAmount = 0;
+                const ul = document.createElement('ul');
+                ul.className = 'space-y-3 mb-4';
+
+                cart.forEach((item, index) => {
+                    const li = document.createElement('li');
+                    li.className = 'flex justify-between items-center border-b pb-3 pt-1';
+                    li.innerHTML = `
+                        <div class="flex-grow">
+                            <span class="font-semibold text-custom-darkblue text-sm">${item.name}</span>
+                            <span class="text-xs text-gray-500 block">Đơn giá: ${item.price.toLocaleString('vi-VN')} VNĐ</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <input type="number" value="${item.quantity}" min="1" class="w-16 text-center border-gray-300 rounded-md shadow-sm p-1 text-sm quantity-input" data-index="${index}">
+                            <span class="text-custom-green font-semibold text-sm w-24 text-right">${(item.price * item.quantity).toLocaleString('vi-VN')} VNĐ</span>
+                            <button class="text-red-500 hover:text-red-700 remove-item-btn text-xs" data-index="${index}">&times; Xóa</button>
+                        </div>
+                    `;
+                    ul.appendChild(li);
+                    totalAmount += item.price * item.quantity;
+                });
+                cartSummaryDiv.appendChild(ul);
+
+                const totalP = document.createElement('p');
+                totalP.className = 'text-right font-bold text-lg text-custom-maroon mt-4';
+                totalP.textContent = `Tổng cộng: ${totalAmount.toLocaleString('vi-VN')} VNĐ`;
+                cartSummaryDiv.appendChild(totalP);
+
+                // Add event listeners for quantity inputs and remove buttons
+                document.querySelectorAll('.quantity-input').forEach(input => {
+                    input.addEventListener('change', handleQuantityChange);
+                    input.addEventListener('input', handleQuantityChange); // For immediate feedback
+                });
+                document.querySelectorAll('.remove-item-btn').forEach(button => {
+                    button.addEventListener('click', handleRemoveItem);
+                });
+            }
+            
+            function handleQuantityChange(event) {
+                const index = parseInt(event.target.dataset.index);
+                let newQuantity = parseInt(event.target.value);
+                if (isNaN(newQuantity) || newQuantity < 1) {
+                    newQuantity = 1; // Reset to 1 if invalid
+                    event.target.value = 1; 
+                }
+                cart[index].quantity = newQuantity;
+                updateCartIcon();
+                renderCartSummary();
+            }
+
+            function handleRemoveItem(event) {
+                const index = parseInt(event.target.dataset.index);
+                cart.splice(index, 1);
+                updateCartIcon();
+                renderCartSummary();
+            }
+
+
+            // --- Modal Event Listeners ---
+            if (closeCartModalBtn) {
+                closeCartModalBtn.addEventListener('click', () => {
+                    if(addToCartModal) addToCartModal.classList.add('hidden');
+                });
+            }
+
+            if (viewCartBtnModal) {
+                viewCartBtnModal.addEventListener('click', () => {
+                    if(addToCartModal) addToCartModal.classList.add('hidden');
+                    renderCartSummary();
+                    if(checkoutModal) checkoutModal.classList.remove('hidden');
+                });
+            }
+
+            if (cartIconNav) {
+                cartIconNav.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    renderCartSummary();
+                    if(checkoutModal) checkoutModal.classList.remove('hidden');
+                });
+            }
+
+            if (closeCheckoutModalBtn) {
+                closeCheckoutModalBtn.addEventListener('click', () => {
+                    if(checkoutModal) checkoutModal.classList.add('hidden');
+                });
+            }
+             if (cancelCheckoutBtn) {
+                cancelCheckoutBtn.addEventListener('click', () => {
+                    if(checkoutModal) checkoutModal.classList.add('hidden');
+                });
+            }
+
+            if (closeSuccessOrderModalBtn) {
+                closeSuccessOrderModalBtn.addEventListener('click', () => {
+                    if(successOrderModal) successOrderModal.classList.add('hidden');
+                });
+            }
+
+            // Close modals by clicking outside
+            window.addEventListener('click', (event) => {
+                if (event.target === addToCartModal) {
+                    if(addToCartModal) addToCartModal.classList.add('hidden');
+                }
+                if (event.target === checkoutModal) {
+                   if(checkoutModal) checkoutModal.classList.add('hidden');
+                }
+                 if (event.target === successOrderModal) {
+                   if(successOrderModal) successOrderModal.classList.add('hidden');
+                }
+            });
+            
+            // Close modals with Escape key
+            window.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    if(addToCartModal && !addToCartModal.classList.contains('hidden')) {
+                        addToCartModal.classList.add('hidden');
+                    }
+                    if(checkoutModal && !checkoutModal.classList.contains('hidden')) {
+                        checkoutModal.classList.add('hidden');
+                    }
+                    if(successOrderModal && !successOrderModal.classList.contains('hidden')) {
+                        successOrderModal.classList.add('hidden');
+                    }
+                }
+            });
+
+            // --- Checkout Form Submission ---
+            if (checkoutForm) {
+                checkoutForm.addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    const formData = new FormData(checkoutForm);
+                    const data = Object.fromEntries(formData.entries());
+                    console.log('Checkout Data:', data);
+                    console.log('Cart Items:', cart);
+                    
+                    if(checkoutModal) checkoutModal.classList.add('hidden');
+                    if(successOrderModal) successOrderModal.classList.remove('hidden'); // Show success modal
+                    
+                    cart = []; // Clear cart
+                    updateCartIcon();
+                    checkoutForm.reset();
+                });
+            }
+            updateCartIcon(); // Initialize cart icon on page load
+        });
+
+        // Testimonial slider logic
+        (function() {
+            const slider = document.querySelector('#testimonialSlider > div');
+            const slides = slider.children;
+            const totalSlides = slides.length;
+            let current = 0;
+            let autoSlideInterval;
+            const prevBtn = document.getElementById('prevTestimonial');
+            const nextBtn = document.getElementById('nextTestimonial');
+            const dotsContainer = document.getElementById('testimonialDots');
+
+            // Create dots
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'h-3 w-3 rounded-full bg-custom-maroon opacity-40';
+                dot.setAttribute('aria-label', `Xem đánh giá ${i+1}`);
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+            function updateDots() {
+                Array.from(dotsContainer.children).forEach((dot, idx) => {
+                    dot.classList.toggle('opacity-100', idx === current);
+                    dot.classList.toggle('opacity-40', idx !== current);
+                });
+            }
+            function goToSlide(idx) {
+                current = (idx + totalSlides) % totalSlides;
+                slider.style.transform = `translateX(-${current * 100}%)`;
+                updateDots();
+                resetAutoSlide();
+            }
+            function nextSlide() { goToSlide(current + 1); }
+            function prevSlide() { goToSlide(current - 1); }
+            function resetAutoSlide() {
+                clearInterval(autoSlideInterval);
+                autoSlideInterval = setInterval(nextSlide, 5000);
+            }
+            if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+            if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+            goToSlide(0);
+            autoSlideInterval = setInterval(nextSlide, 5000);
+            // Pause on hover
+            slider.parentElement.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+            slider.parentElement.addEventListener('mouseleave', resetAutoSlide);
+        })();
+
+        // --- News & Tips Slider ---
+        (function() {
+            const slider = document.querySelector('#newsSlider > div');
+            if (!slider) return;
+            const slides = slider.children;
+            const totalSlides = slides.length;
+            let current = 0;
+            let autoSlideInterval;
+            const prevBtn = document.getElementById('prevNews');
+            const nextBtn = document.getElementById('nextNews');
+            const dotsContainer = document.getElementById('newsDots');
+
+            // Create dots
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'h-3 w-3 rounded-full bg-custom-maroon opacity-40';
+                dot.setAttribute('aria-label', `Xem nhóm tin ${i+1}`);
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+            function updateDots() {
+                Array.from(dotsContainer.children).forEach((dot, idx) => {
+                    dot.classList.toggle('opacity-100', idx === current);
+                    dot.classList.toggle('opacity-40', idx !== current);
+                });
+            }
+            function goToSlide(idx) {
+                current = (idx + totalSlides) % totalSlides;
+                slider.style.transform = `translateX(-${current * 100}%)`;
+                updateDots();
+                resetAutoSlide();
+            }
+            function nextSlide() { goToSlide(current + 1); }
+            function prevSlide() { goToSlide(current - 1); }
+            function resetAutoSlide() {
+                clearInterval(autoSlideInterval);
+                autoSlideInterval = setInterval(nextSlide, 7000);
+            }
+            if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+            if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+            goToSlide(0);
+            autoSlideInterval = setInterval(nextSlide, 7000);
+            // Pause on hover
+            slider.parentElement.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+            slider.parentElement.addEventListener('mouseleave', resetAutoSlide);
+        })();
+
+        // --- Product Quick View ---
+        const productQuickViewModal = document.getElementById('productQuickViewModal');
+        const closeQuickViewModalBtn = document.getElementById('closeQuickViewModalBtn');
+        const quickViewImg = document.getElementById('quickViewImg');
+        const quickViewName = document.getElementById('quickViewName');
+        const quickViewDesc = document.getElementById('quickViewDesc');
+        const quickViewPrice = document.getElementById('quickViewPrice');
+        const quickViewAddToCartBtn = document.getElementById('quickViewAddToCartBtn');
+        let quickViewProduct = null;
+
+        // Gỡ nút 'Xem nhanh' nếu có
+        document.querySelectorAll('.quick-view-btn').forEach(btn => btn.remove());
+        // Thêm sự kiện click cho tên và ảnh sản phẩm
+        document.querySelectorAll('.product-card').forEach(card => {
+            const nameEl = card.querySelector('h4');
+            const imgEl = card.querySelector('img');
+            if (nameEl) {
+                nameEl.style.cursor = 'pointer';
+                nameEl.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    showQuickView(card);
+                });
+            }
+            if (imgEl) {
+                imgEl.style.cursor = 'pointer';
+                imgEl.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    showQuickView(card);
+                });
+            }
+        });
+        function showQuickView(productCard) {
+            const name = productCard.querySelector('h4')?.textContent || '';
+            const desc = productCard.querySelector('p.text-custom-darkblue')?.textContent || '';
+            const price = productCard.querySelector('.text-lg.font-bold')?.textContent || '';
+            const img = productCard.querySelector('img')?.src || '';
+            if (quickViewName) quickViewName.textContent = name;
+            if (quickViewDesc) quickViewDesc.textContent = desc;
+            if (quickViewPrice) quickViewPrice.textContent = price;
+            if (quickViewImg) quickViewImg.src = img;
+            quickViewProduct = { name, price };
+            if(productQuickViewModal) productQuickViewModal.classList.remove('hidden');
+        }
+
+        // Close quick view modal
+        if (closeQuickViewModalBtn) {
+            closeQuickViewModalBtn.addEventListener('click', () => {
+                if(productQuickViewModal) productQuickViewModal.classList.add('hidden');
+            });
+        }
+        // Close modal when click outside
+        window.addEventListener('click', (event) => {
+            if (event.target === productQuickViewModal) {
+                if(productQuickViewModal) productQuickViewModal.classList.add('hidden');
+            }
+        });
+        // Add to cart from quick view
+        if (quickViewAddToCartBtn) {
+            quickViewAddToCartBtn.addEventListener('click', () => {
+                if (quickViewProduct) {
+                   
+                    // Parse price from text
+                    const priceString = quickViewProduct.price.split('VNĐ')[0].replace(/\./g, '').trim();
+                    const price = parseFloat(priceString);
+                    addItemToCart(quickViewProduct.name, price);
+                    if(confirmProductName) confirmProductName.textContent = `Sản phẩm "${quickViewProduct.name}" đã được thêm vào giỏ hàng của bạn.`;
+                    if(addToCartModal) addToCartModal.classList.remove('hidden');
+                    if(productQuickViewModal) productQuickViewModal.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
