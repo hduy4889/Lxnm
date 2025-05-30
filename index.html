@@ -46,11 +46,12 @@
         .btn {
             display: inline-block;
             padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem; /* rounded-lg */
+            border-radius: 9999px; /* rounded-full */
             font-weight: 600; /* semibold */
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: all 0.3s ease;
             text-align: center;
             cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
         .btn-maroon {
             background-color: #792220; /* Maroon */
@@ -595,6 +596,25 @@
         </div>
     </div>
 
+    <!-- Promotion Modal -->
+    <div id="promotionModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 overflow-y-auto h-full w-full flex items-center justify-center hidden z-50 modal">
+        <div class="p-8 border w-auto max-w-md shadow-lg rounded-xl bg-white mx-4 relative">
+            <div class="text-center">
+                <div class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-custom-maroon mb-4">
+                    <svg class="h-12 w-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path>
+                    </svg>
+                </div>
+                <h3 class="text-3xl font-bold text-custom-maroon mb-3">Giảm Giá 30%!</h3>
+                <p class="text-custom-darkblue mb-6 text-lg">Ưu đãi đặc biệt cho tất cả sản phẩm. Nhanh tay đặt hàng ngay hôm nay!</p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
+                    <a href="#products" class="btn btn-maroon">Mua Ngay</a>
+                    <button id="closePromotionModalBtn" class="btn btn-green">Để Sau</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Mobile menu toggle
@@ -906,6 +926,8 @@
             const dotsContainer = document.getElementById('newsDots');
 
             // Create dots
+           
+           
             for (let i = 0; i < totalSlides; i++) {
                 const dot = document.createElement('button');
                 dot.className = 'h-3 w-3 rounded-full bg-custom-maroon opacity-40';
@@ -1011,6 +1033,37 @@
                 }
             });
         }
+
+        // Kiểm tra xem người dùng đã xem popup chưa
+        function hasSeenPromotion() {
+            return localStorage.getItem('hasSeenPromotion') === 'true';
+        }
+
+        // Đánh dấu đã xem popup
+        function markPromotionAsSeen() {
+            localStorage.setItem('hasSeenPromotion', 'true');
+        }
+
+        // Hiển thị popup
+        function showPromotion() {
+            if (!hasSeenPromotion()) {
+                const modal = document.getElementById('promotionModal');
+                modal.classList.remove('hidden');
+                markPromotionAsSeen();
+            }
+        }
+
+        // Đóng popup
+        function closePromotion() {
+            const modal = document.getElementById('promotionModal');
+            modal.classList.add('hidden');
+        }
+
+        // Thêm event listener cho nút đóng
+        document.getElementById('closePromotionModalBtn').addEventListener('click', closePromotion);
+
+        // Hiển thị popup khi trang web được tải
+        window.addEventListener('load', showPromotion);
     </script>
 
 </body>
